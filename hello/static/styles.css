@@ -1,0 +1,49 @@
+html, body{
+    background-color: black;
+}
+
+.nav-brand {
+    color: grey;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 700;
+    transition: ease 1s;
+}
+.nav-brand:hover {
+    color: rgb(228, 228, 228);
+}
+.search {
+    display: flex;
+    justify-content: flex-end;
+}
+.search .form-control{
+    background-color: transparent;
+    border: solid grey;
+}
+.search .form-control:focus{
+    background-color: transparent;
+    border: solid rgb(184, 184, 184);
+    
+}
+.search .btn {
+    color: grey;
+    border: solid grey;
+}
+.search .btn:hover {
+    background-color: grey;
+    border: solid grey;
+    color: black;
+}
+
+.results {
+    background-color: rgb(26, 26, 26);
+    height: 90vh;
+    width: 100vw;
+    padding: 2.5%;
+}
+.result {
+    height: 15vh;
+    width: 25vw;
+    background-color: rgb(255, 255, 255);
+    margin-top: 25%;
+}
