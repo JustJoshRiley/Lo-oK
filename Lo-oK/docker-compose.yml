@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  web:
+    build: .
+    command: python app.py runserver 0.0.0.0:5000
+    ports:
+      - "5000:5000"

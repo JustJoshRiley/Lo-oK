@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{% block results %} 
+
+<div class= row>
+  {% for result in newDict %}
+  <div class="card">
+    <h5 class="card-header"><a href="{{ result.url }}">{{ result.title }}</a></h5>
+    <div class="card-body">
+      <h5 class="card-url">{{ result.url }}</h5>
+      <p class="card-text">{{ result.description }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+
+{% endblock %}
