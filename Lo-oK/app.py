@@ -28,7 +28,7 @@ def getResponse():
 
         res = service.cse().list(
             q=search, 
-            cx='3150098a9e3b71586', num="10").execute()
+            cx='3150098a9e3b71586').execute()
 
         newDict = []
 
@@ -45,7 +45,6 @@ def getResponse():
         print(newDict)
 
         return render_template('results.html', newDict=newDict)
-        # return render_template(..., title="", )
 
 
 if __name__ == '__main__':
