@@ -1,7 +1,6 @@
 # Lo-oK
 
-![Look Web Page](/Users/joshy/Desktop/Desktop - Joshy's MacBook Pro/Fall 2021/Intensive/Lo-oK/static/lookwebpage.png)
-
+<image src="/Users/joshy/Desktop/Desktop - Joshy's MacBook Pro/Fall 2021/Intensive/Lo-oK/static/lookwebpage.png">
 
 Look is a lightweight Python application that allows users to search the web and receive results without the hassles of current searching browsers.
 
