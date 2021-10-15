@@ -1,5 +1,7 @@
 # Lo-oK
 
+![Look Web Page](/static/lookwebpage.png)
+
 Look is a lightweight Python application that allows users to search the web and receive results without the hassles of current searching browsers.
 
 ## Installation
