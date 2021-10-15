@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="logout">
+  <button onclick="logout()" type="button" class="logout-bttn">Log Out</button>
+</div>
+<div class="registered-container container-fluid">
+    <h1>Welcome 😊 {{ username }}</h1>
+    <div class="row footer fixed-bottom">
+        <div class="col">About</div>
+        <div class="col">Contact</div>
+        <div class="col">Settings</div>
+      </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<script >
+    hashPassword = () => {
+      console.log("lmao")
+      let user_input = document.getElementById('password2')
+      let password = user_input.value
+      user_input.value = sha512.sha512(password)
+      console.log(user_input.value)
+    }
+</script>
+
+
+<div class="login-container container-fluid">
+    <div class="log-in-row">
+        <div class="header-row row">
+            <h1>Welcome 😊 {{ username }}</h1>
+            <h3>Please Sign In Below</h3>
+        </div>
+        <form class="LogIn-form" action="{{ url_for('login') }}" onsubmit="hashPassword()" method="POST">
+            <input class="hide" id="username" value="{{ username }}" name="username">
+            <label for="password2">Password</label>
+            <input id="password2" type="password" name="password">
+            <button type="submit" class="modal-btn btn bnt-primary">Log In</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

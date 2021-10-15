@@ -10,27 +10,162 @@
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}"/>
 
     <title>{% block title %} {% endblock %}</title>
+    <script type="module" src="{{ url_for('static', filename='sha512.js') }}"></script>
+    <script>
+      function cookieToDict(cookie){
+        const s = cookie.split(';');
+        var ret = {}
+        s.forEach((entry) => {
+          console.log(entry)
+          var key = entry.split('=')[0].trim();
+          var value = entry.split('=')[1]
+          ret[key]=value;
+        })
+        return ret;
+      }
+      function redirectPost(url, data) {
+        var form = document.createElement('form');
+        document.body.appendChild(form);
+        form.method = 'post';
+        form.action = url;
+        for (var name in data) {
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = data[name];
+          form.appendChild(input);
+      }
+      form.submit();
+    }
+      hashPassword = () => {
+        let user_input = document.getElementById('password')
+        let password = user_input.value
+        user_input.value = sha512.sha512(password)
+        confirmedPassword = hashConfirmPassword()
+        if (confirmedPassword != user_input.value) {
+          alert("Please Make Sure Your Password is Correct")
+        }
+      }
+      hashConfirmPassword = () => {
+        let user_input = document.getElementById('confirmPassword')
+        let confirmPassword = user_input.value
+        user_input.value = sha512.sha512(confirmPassword)
+        return(user_input.value)
+      }
+      hashPassword2 = () => {
+        let user_input = document.getElementById('password2')
+        let password = user_input.value
+        user_input.value = sha512.sha512(password)
+      }
+      checkIfLoggedInAndRedirect = () => {
+        // grab the cookie data you want
+        var cookie = document.cookie
+        var split_cookie = cookieToDict(cookie)
+        form_data = {
+          'username' : split_cookie["username"],
+          'password' : split_cookie["password"]
+        }
+        console.log(split_cookie)
+        // if the user's cookie makes you think they're logged in
+        if (typeof form_data["username"] == "undefined" && typeof form_data["password"] == "undefined") {
+          // otherwise return and do nothing
+          console.log('not')
+          return("please Log in")
+        }
+        else {
+          // send data in a post request to the handleLoggedInUser endpoint
+          console.log('redirecting')
+          redirectPost("{{ url_for('handleLoggedInUser') }}", form_data)
+        }
+      }
+      function deleteAllCookies() {
+      var cookies = document.cookie.split(";");
+
+      for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          var eqPos = cookie.indexOf("=");
+          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+      }
+      function logout() {
+        deleteAllCookies()
+        redirectPost("{{ url_for('index') }}")
+      }
+    </script>
   </head>
   <body>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+    <!-- Account Modal -->
+    <div class="modal fade" id="AccountModalToggle" aria-hidden="true" aria-labelledby="AccountModalToggleLabel" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">Have an Account?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <img src="https://img.icons8.com/material/24/FFFFFF/close-window--v1.png"/>
+            </button>
+          </div>
+          <div class="modal-body">
+            <button class="modal-btn btn btn-primary" data-bs-target="#SignUpModalToggle" data-bs-toggle="modal">Sign Up</button>
+            <button class="modal-btn btn btn-primary" data-bs-target="#LogInModalToggle" data-bs-toggle="modal">Log In</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <!-- SignUp Modal -->
+    <div class="modal fade" id="SignUpModalToggle" aria-hidden="true" aria-labelledby="SignUpModalToggleLabel2" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="SignUpModalToggleLabel2">Sign Up</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <img src="https://img.icons8.com/material/24/FFFFFF/close-window--v1.png"/>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="signup-form" action="{{ url_for('signup') }}" onsubmit="hashPassword()" method="post">
+              <label for="username">Username</label>
+              <input id="username" name="username" type="text" required aria-required="true"/>
+              <label for="password">Password</label>
+              <input  type="password" id="password" name="password" required aria-required="true"/>
+              <label for="password">Confirm Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" required aria-required="true"/>
+            </div>
+            <div class="modal-footer">
+              <button class="modal-btn btn btn-secondary"  data-bs-target="#AccountModalToggle" data-bs-toggle="modal">Back</button>
+              <button class="modal-btn btn btn-primary"  type="submit" >Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="LogInModalToggle" aria-hidden="true" aria-labelledby="LogInModalToggleLabel2" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="LogInModalToggleLabel2">Log In</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <img src="https://img.icons8.com/material/24/FFFFFF/close-window--v1.png"/>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="login-form" action="{{ url_for('login') }}" onsubmit="hashPassword2()" method="post">
+              <label for="username2">Username</label>
+              <input type="text" name="username2" id="username2" required aria-required="true"/>
+              <label for="password">Password</label>
+              <input type="password" name="password2" id="password2" required aria-required="true"/>
+            </div>
+            <div class="modal-footer">
+              <button class="modal-btn btn btn-secondary"  data-bs-target="#AccountModalToggle" data-bs-toggle="modal">Back</button>
+              <button class="modal-btn btn btn-primary"  type="submit" >Log In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <nav class="navbar">
         <div class="container-fluid">
@@ -39,14 +174,13 @@
             <input aria-required="true" required class="form-control me-2" name="response" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline" type="submit">Search</button>
           </form>
-          <button type="button" class="profile" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button onclick="checkIfLoggedInAndRedirect()" type="button" class="profile" data-bs-toggle="modal" href="#AccountModalToggle">
             Profile
           </button>
         </div>
     </nav>
     <div class="container-fluid">
         {% block content %} {% endblock %}
-        <!-- {% block results %} {% endblock %} -->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -55,5 +189,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    
   </body>
 </html>

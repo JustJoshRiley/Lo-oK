@@ -75,24 +75,30 @@ body{
     from{ transform: rotate(-360deg); }
     to{ transform: rotate(360deg); }
 }
+/*  */
+/*  */
+/*  */
 /* Results.html */
 .results-container {
     height: 100%;
     border-top: solid 1px white;
     border-bottom: solid 1px white;
     margin-top: 2.5%; 
+    padding-left: .5%;
+    padding-right: .5%;
     display: flex;
     justify-content: center;
     border-radius: 20px;
 }
 .results {
     background-color: rgb(36, 36, 36);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-
 .card {
     border-radius: 0;
-    width: 98%;
+    width: 99%;
     max-height: fit-content;
     padding: .5%;
     background-color: rgb(29, 28, 28);
@@ -114,15 +120,17 @@ body{
     color: white;
     font-size: 12px;
 }
-
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
 /* index.html */
-
 .info, .container-fluid {
     height: 100%;
     margin: 0;
     padding: 0;
 }
-
 .header {
     display: flex;
     flex-direction: column;
@@ -140,7 +148,6 @@ body{
     font-size: 5em;
     margin-bottom: 0;
 }
-
 .features {
     height: 30vh;
     width: 100%;
@@ -149,15 +156,12 @@ body{
     grid-template-rows: auto auto auto;
     color: pink;
 }
-
 .features-row {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100%; */
     width: 100vw;
 }
-
 .features .row {
     display: flex;
     justify-content: center;
@@ -169,6 +173,12 @@ body{
 .row {
     margin-left: 0;
 }
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
 /* footer */
 .footer {
     width: 100vw;
@@ -190,7 +200,170 @@ body{
     text-decoration: underline;
 }
 
+/* Modal */
+.modal {
+    background-color: black;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.modal-content {
+    background-color: black;
+    border: solid 1px pink;
+}
+.modal-header {
+    border-bottom: solid 1px pink;
+}
+.modal-title {
+    width: 100%;
+    color: rgb(85, 84, 84);
+}
+.btn-close {
+    background-color: transparent;
+    border: none;
+}
 
+.modal-body {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+
+.modal-btn {
+    background-color: transparent;
+    border: solid 1px rgb(165, 124, 130);
+}
+.modal-btn:hover {
+    background-color: transparent;
+    border: solid 1px pink;
+    color: rgb(110, 110, 110);
+}
+
+.signup-form, .login-form {
+    display: flex;
+    flex-direction: column;
+}
+.signup-form label, .login-form label {
+    color: pink;
+    margin-top: 5%;
+}
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* registered.html */
+.registered-container {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* overflow: hidden; */
+}
+.registered-container h1 {
+    font-size: 5.5em;
+    text-align: center;
+    color: pink;
+}
+.logout {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1%;
+}
+.logout-bttn {
+    background-color: transparent;
+    border: none;
+    transition: linear .25s;
+    cursor: pointer;
+    color: pink;
+}
+
+.logout-bttn:active{
+    background-color: white;
+
+}
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* login.html */
+.login-container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+.log-in-row {
+    border: solid 1px pink;
+    padding: 5%;
+}
+.header-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.login-container h1 {
+    font-size: 5.5em;
+    text-align: center;
+    color: pink;
+    margin-bottom: 5%;
+}
+.login-container h3 {
+    color: rgb(145, 145, 145);
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 5%;
+}
+.LogIn-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.LogIn-form label {
+    color: pink;
+}
+.LogIn-form button {
+    margin-top: 15%;
+    color: pink;
+
+}
+.hide{
+    display: none;
+}
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* 404.html */
+.error-container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    border: solid 1px pink;
+    padding: 5%;
+}
+.error-container h1 {
+    font-size: 5.5em;
+    text-align: center;
+    color: pink;
+    margin-bottom: 5%;
+}
+.error-container h4 {
+    font-size: 3.5em;
+    text-align: center;
+    color: pink;
+}
 
 
 @media only screen and (max-width: 768px) {
@@ -198,8 +371,7 @@ body{
     .header-text h1{
         font-size: 2.5em;
     }
-    .navbar {
-    }
+    
     .navbar-brand {
         text-align: center;
         width: 100%;
@@ -223,9 +395,6 @@ body{
         padding: 0;
     }
 
-    
-    
-
     .header {
         text-align: center;
     }
@@ -237,6 +406,12 @@ body{
         display: flex;
         justify-content:center;
         align-items: center;
+    }
+    .registered-container h1 {
+        font-size: 3em;
+    }
+    .logout-bttn {
+        display: none;
     }
     
 }
