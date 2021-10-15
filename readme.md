@@ -10,10 +10,10 @@ None Required [Start Searching Now](http://look.dev.justjoshriley.com/).
 
 ## Made With:
 
-Backend : Python
-Frontend : Javascript
-Database : MongoDb
-Deployment: Caprover
+Backend : Python <br/>
+Frontend : Javascript <br/>
+Database : MongoDb <br/>
+Deployment: Caprover <br/>
 
 
 ## Contributing
