@@ -12,7 +12,7 @@ None Required [Start Searching Now](http://look.dev.justjoshriley.com/).
 https://img.shields.io/badge/<Backend>-<Python>-<Yellow>
 https://img.shields.io/badge/<Frontend>-<Javascript>-<Green>
 https://img.shields.io/badge/<Databse>-<MongoDb>-<White>
-
+https://img.shields.io/static/v1?label=<LABEL>&message=<MESSAGE>&color=<COLOR>
 
 
 ## Contributing
